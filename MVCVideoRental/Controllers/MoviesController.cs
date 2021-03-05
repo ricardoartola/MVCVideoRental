@@ -14,7 +14,6 @@ namespace MVCVideoRental.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [Authorize(Roles = RoleName.CanManage)]
         // GET: Movies
         public ActionResult Index()
         {
@@ -40,6 +39,7 @@ namespace MVCVideoRental.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = RoleName.CanManage)]
         // GET: Movies/Create
         public ActionResult Create()
         {
@@ -52,6 +52,7 @@ namespace MVCVideoRental.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManage)]
         public ActionResult Create([Bind(Include = "Id,Name,GenreId,DateAdded,ReleaseDate,NumberInStock,NumberAvailable")] Movie movie)
         {
             if (ModelState.IsValid)
@@ -66,6 +67,7 @@ namespace MVCVideoRental.Controllers
         }
 
         // GET: Movies/Edit/5
+        [Authorize(Roles = RoleName.CanManage)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +88,7 @@ namespace MVCVideoRental.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManage)]
         public ActionResult Edit([Bind(Include = "Id,Name,GenreId,DateAdded,ReleaseDate,NumberInStock,NumberAvailable")] Movie movie)
         {
             if (ModelState.IsValid)
@@ -99,6 +102,7 @@ namespace MVCVideoRental.Controllers
         }
 
         // GET: Movies/Delete/5
+        [Authorize(Roles = RoleName.CanManage)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +120,7 @@ namespace MVCVideoRental.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManage)]
         public ActionResult DeleteConfirmed(int id)
         {
             Movie movie = db.Movies.Find(id);
